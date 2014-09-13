@@ -21,6 +21,7 @@ parser.add_argument('targets', metavar='name', nargs='+', help='names of program
 args = parser.parse_args()
 
 arch = args.architecture
+cflags=[]
 ldflags = getattr(args, 'linker_flags', [])
 targets = args.targets
 
@@ -39,8 +40,11 @@ def print_variable(before_eq, after_eq):
 
 if arch is not None:
 	print_variable('ARCH?', arch)
-	ldflags.insert(0, '-arch')
-	ldflags.insert(1, arch)
+	cflags.insert(0, '-arch')
+	cflags.insert(1, arch)
+
+if cflags:
+	print_variable('CFLAGS+', ' '.join(cflags))
 if ldflags:
 	print_variable('LDFLAGS+', ' '.join(ldflags))
 
