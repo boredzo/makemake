@@ -15,7 +15,7 @@ def LinkerAction(in_flag):
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--library', metavar='name', action=LinkerAction('-l'), help='name of a library to link against')
 parser.add_argument('-f', '-framework', '--framework', metavar='name', action=LinkerAction('-framework'), help='name of a framework to link against')
-parser.add_argument('-a', '--architecture', '--arch', metavar='arch', action='store', default=None, dest='architecture', help='name of the architecture to build for')
+parser.add_argument('-a', '--architecture', '--arch', '-arch', metavar='arch', action='store', default=None, dest='architecture', help='name of the architecture to build for')
 parser.add_argument('targets', metavar='name', nargs='+', help='names of programs to build (requires name.c or name.m to exist)')
 
 args = parser.parse_args()
