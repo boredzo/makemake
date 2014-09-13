@@ -43,6 +43,8 @@ if arch is not None:
 	print_variable('ARCH?', arch)
 	cflags.insert(0, '-arch')
 	cflags.insert(1, arch)
+	ldflags.insert(0, '-arch')
+	ldflags.insert(1, arch)
 if args.strict_cflags:
 	cflags.insert(0, '-std=c99')
 	cflags.insert(1, '-Wall')
