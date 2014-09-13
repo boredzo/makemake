@@ -47,9 +47,15 @@ if ldflags:
 if printed_any_variables:
 	print
 
+printed_all_target = False
+if len(targets) > 1:
+	print 'all:', ' '.join(targets)
+	printed_all_target = True
+	print
+
 for target in targets:
 	print '%s: %s.o' % (target, target)
 print
 print 'clean:'
 print '\trm *.o'
-print '.PHONY: clean'
+print '.PHONY: clean' + ' all' * printed_all_target
