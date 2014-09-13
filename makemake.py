@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--library', metavar='name', action=LinkerAction('-l'), help='name of a library to link against')
 parser.add_argument('-f', '-framework', '--framework', metavar='name', action=LinkerAction('-framework'), help='name of a framework to link against')
 parser.add_argument('-a', '--architecture', '--arch', '-arch', metavar='arch', action='store', default=None, dest='architecture', help='name of the architecture to build for')
+parser.add_argument('--strict-cflags', action='store_true', help='include a CFLAGS variable that enables some strict checking')
 parser.add_argument('targets', metavar='name', nargs='+', help='names of programs to build (requires name.c or name.m to exist)')
 
 args = parser.parse_args()
@@ -42,6 +43,9 @@ if arch is not None:
 	print_variable('ARCH?', arch)
 	cflags.insert(0, '-arch')
 	cflags.insert(1, arch)
+if args.strict_cflags:
+	cflags.insert(0, '-std=c99')
+	cflags.insert(1, '-Wall')
 
 if cflags:
 	print_variable('CFLAGS+', ' '.join(cflags))
